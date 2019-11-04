@@ -1,0 +1,9 @@
+{
+  "debug": true,
+  "ispaused": false,
+  "nomicsapikey": "c08226e3ec959614dae9d87797e25412",
+  "requesttimeoutssecond": {
+    "balance": 10
+  },
+  "user": "me@laptop"
+}

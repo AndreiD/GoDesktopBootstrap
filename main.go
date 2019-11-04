@@ -1,27 +1,52 @@
 package main
 
 import (
-  "github.com/leaanthony/mewn"
-  "github.com/wailsapp/wails"
+	"github.com/leaanthony/mewn"
+	"github.com/wailsapp/wails"
+	"godesktop/configs"
+	"godesktop/cryptocurrency"
+	"godesktop/sys"
+	"godesktop/utils/log"
 )
 
-func basic() string {
-  return "Hello World!"
+const version = "0.0.3 Gas"
+
+var configuration *configs.ViperConfiguration
+
+func init() {
+
+	configuration = configs.NewConfiguration()
+	configuration.Init()
+
+	debug := configuration.GetBool("debug")
+	log.Init(debug)
+	configuration.Set("isPaused", false)
+
+	log.Println("----------------------------------------------")
+	log.Warn("ArbitrageX Starting.... version: " + version)
+	log.Println("----------------------------------------------")
+
 }
 
 func main() {
+	log.Println("ArbitrageX " + version)
+	js := mewn.String("./frontend/dist/app.js")
+	css := mewn.String("./frontend/dist/app.css")
 
-  js := mewn.String("./frontend/dist/app.js")
-  css := mewn.String("./frontend/dist/app.css")
+	pipe := &sys.Pipe{}
+	sys.Conf = configuration
 
-  app := wails.CreateApp(&wails.AppConfig{
-    Width:  1024,
-    Height: 768,
-    Title:  "Go Desktop Bootstrap",
-    JS:     js,
-    CSS:    css,
-    Colour: "#131313",
-  })
-  app.Bind(basic)
-  app.Run()
+	cryptocurrency.SyncConversionRates(configuration)
+
+	// run the application
+	app := wails.CreateApp(&wails.AppConfig{
+		Width:  1600,
+		Height: 960,
+		Title:  "GoDesktop v1.0",
+		JS:     js,
+		CSS:    css,
+		Colour: "#333333",
+	})
+	app.Bind(pipe)
+	app.Run()
 }
