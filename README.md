@@ -1,3 +1,5 @@
+# OUTDATED REPO! -> lots of things happen in 3 years. 
+
 # Go Desktop Bootstrap
 
 <img src="https://raw.githubusercontent.com/AndreiD/GoDesktopBootstrap/master/assets/screenshot1.png" alt="screenshot" />
