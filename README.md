@@ -1,4 +1,4 @@
-# OUTDATED REPO! -> lots of things happen in 3 years. 
+# OUTDATED REPO!! -> lots of things happen in 3 years. 
 
 # Go Desktop Bootstrap
 
